@@ -11,8 +11,9 @@
 
 <header class="site-header">
   <nav class="nav">
-    <a href="{{ url_for('home') }}" class="brand">
-      <span class="mark">R.</span> Rumangsa Kopi
+    <a href="{{ url_for('home') }}" class="brand-logo">
+      <img src="{{ url_for('static', filename='img/logo.jfif') }}" alt="Logo Rumangsa Kopi" class="logo-img">
+      <span class="brand-text">Rumangsa Kopi</span>
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="Buka menu navigasi">&#9776;</button>
     <div class="nav-links" id="navLinks">
