@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Rumangsa Kopi{% endblock %} — Pontianak</title>
+<meta name="description" content="Rumangsa Kopi — kedai kopi cozy di Komplek UNTAN, Pontianak. Kopi, signature drink, dan menu makanan untuk nongkrong santai.">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="{{ url_for('home') }}" class="brand">
+      <span class="mark">R.</span> Rumangsa Kopi
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu navigasi">&#9776;</button>
+    <div class="nav-links" id="navLinks">
+      <a href="{{ url_for('home') }}" class="{{ 'active' if request.endpoint=='home' }}">Beranda</a>
+      <a href="{{ url_for('menu') }}" class="{{ 'active' if request.endpoint=='menu' }}">Menu</a>
+      <a href="{{ url_for('gallery') }}" class="{{ 'active' if request.endpoint=='gallery' }}">Galeri</a>
+      <a href="{{ url_for('about') }}" class="{{ 'active' if request.endpoint=='about' }}">Tentang &amp; Lokasi</a>
+    </div>
+  </nav>
+</header>
+
+{% block content %}{% endblock %}
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Rumangsa Kopi</h4>
+        <p style="opacity:.85;max-width:34ch;font-size:0.92rem;">
+          Kopi yang diseduh dengan rasa, ruang yang dibangun dengan suasana.
+          Tempat untuk pelan-pelan menikmati hari di tengah Pontianak.
+        </p>
+      </div>
+      <div>
+        <h4>Jelajahi</h4>
+        <a href="{{ url_for('home') }}">Beranda</a>
+        <a href="{{ url_for('menu') }}">Menu</a>
+        <a href="{{ url_for('gallery') }}">Galeri</a>
+        <a href="{{ url_for('about') }}">Tentang &amp; Lokasi</a>
+      </div>
+      <div>
+        <h4>Kunjungi</h4>
+        <a href="#">{{ info.address }}</a>
+        <a href="tel:{{ info.phone }}">{{ info.phone }}</a>
+        <a href="https://instagram.com/rumangsa.kopi" target="_blank" rel="noopener">{{ info.instagram }}</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; {{ 2026 }} Rumangsa Kopi. Dibuat dengan secangkir kopi.</span>
+      <span>Pontianak · Singkawang</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Audio backsound -->
+<audio id="bgAudio" loop preload="none">
+  <source src="{{ url_for('static', filename='audio/backsound.mp3') }}" type="audio/mpeg">
+</audio>
+<button class="sound-toggle muted" id="soundToggle" aria-label="Nyalakan musik latar" title="Nyalakan musik latar">&#9835;</button>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Beranda{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+  <video autoplay muted loop playsinline poster="{{ url_for('static', filename='img/hero-poster.jpg') }}">
+    <source src="{{ url_for('static', filename='video/hero.mp4') }}" type="video/mp4">
+  </video>
+  <div class="hero-content">
+    <span class="eyebrow">Komplek UNTAN &middot; Pontianak Tenggara</span>
+    <h1>Pelan-pelan saja, kopinya tetap hangat.</h1>
+    <p class="lead">Rumangsa Kopi adalah ruang singgah untuk ngopi pagi, rapat sore, atau ngobrol panjang malam hari — diracik oleh barista yang serius soal rasa.</p>
+    <div class="hero-actions">
+      <a href="{{ url_for('menu') }}" class="btn btn-primary">Lihat Menu</a>
+      <a href="{{ url_for('about') }}" class="btn btn-ghost">Cara ke Sini</a>
+    </div>
+  </div>
+</section>
+
+<div class="steam-divider"></div>
+
+<section class="reveal">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Kenapa Rumangsa</span>
+      <h2>Tiga alasan orang balik lagi.</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="icon">&#9749;</div>
+        <h3>Racikan Barista Berpengalaman</h3>
+        <p>Setiap cangkir diseduh dengan standar yang sama seriusnya seperti di kedai-kedai kopi besar, tapi dengan sentuhan personal khas Rumangsa.</p>
+      </div>
+      <div class="card">
+        <div class="icon">&#127795;</div>
+        <h3>Suasana Indoor &amp; Outdoor</h3>
+        <p>Area dalam yang nyaman untuk kerja fokus, dan teras outdoor yang teduh untuk ngobrol santai sambil menikmati udara sore.</p>
+      </div>
+      <div class="card">
+        <div class="icon">&#127859;</div>
+        <h3>Menu Lengkap, Bukan Cuma Kopi</h3>
+        <p>Dari signature drink, rice bowl, sampai dimsum — cukup untuk menemani dari jam sarapan sampai makan malam.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt reveal">
+  <div class="container grid-2">
+    <div>
+      <div class="about-photo">
+        <img src="{{ url_for('static', filename='img/about-home.jpg') }}" alt="Suasana Rumangsa Kopi">
+      </div>
+    </div>
+    <div>
+      <span class="eyebrow" style="color:var(--terracotta-deep);font-weight:700;">Tentang Kami</span>
+      <h2>Dari Pontianak, untuk yang suka duduk lama.</h2>
+      <p>Rumangsa Kopi berdiri di Komplek UNTAN sebagai tempat singgah warga sekitar — mahasiswa yang mengerjakan tugas, pekerja yang rapat santai, atau siapa saja yang sekadar ingin ngopi tanpa terburu-buru. Kini Rumangsa juga hadir 24 jam di Singkawang.</p>
+      <a href="{{ url_for('about') }}" class="btn btn-dark">Selengkapnya Tentang Kami</a>
+    </div>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Galeri</span>
+      <h2>Sekilas suasana Rumangsa.</h2>
+    </div>
+    <div class="teaser-strip">
+      {% for g in gallery %}
+      <a href="{{ url_for('gallery') }}">
+        <figure><img src="{{ url_for('static', filename=g.src) }}" alt="{{ g.caption }}"></figure>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Tentang &amp; Lokasi{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <div class="container">
+    <span class="eyebrow">Tentang &amp; Lokasi</span>
+    <h1>Temui kami di Komplek UNTAN.</h1>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="grid-2">
+      <div>
+        <h2>Cerita Singkat</h2>
+        <p>Rumangsa Kopi mulai dari satu kedai kecil di Pontianak yang ingin jadi ruang tengah bagi siapa saja — mahasiswa, pekerja, atau warga sekitar — untuk duduk lama tanpa merasa terburu-buru. Nama "Rumangsa" sendiri membawa nuansa kehangatan rumah: tempat yang akrab, bukan sekadar kedai kopi biasa.</p>
+        <p>Seiring waktu, Rumangsa berkembang dengan membuka cabang di Singkawang yang buka 24 jam penuh, melengkapi kedai Pontianak yang tetap jadi tempat favorit untuk ngopi pagi sampai tengah malam.</p>
+      </div>
+      <div class="about-photo">
+        <img src="{{ url_for('static', filename='img/about-page.jpg') }}" alt="Area komunal Rumangsa Kopi">
+      </div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>Alamat</h4>
+        <p style="margin:0;">{{ info.address }}</p>
+      </div>
+      <div class="info-card">
+        <h4>Kontak</h4>
+        <p style="margin:0;"><a href="tel:{{ info.phone }}">{{ info.phone }}</a><br><a href="https://instagram.com/rumangsa.kopi" target="_blank" rel="noopener">{{ info.instagram }}</a></p>
+      </div>
+      <div class="info-card">
+        <h4>Jam Buka — Pontianak</h4>
+        <p style="margin:0;">{{ info.hours_ptk }}</p>
+      </div>
+      <div class="info-card">
+        <h4>Jam Buka — Singkawang</h4>
+        <p style="margin:0;">{{ info.hours_skw }}</p>
+      </div>
+    </div>
+
+    <div class="map-frame">
+      <iframe
+        src="https://maps.google.com/maps?q=Komplek%20Untan%20Jl%20Karangan%20No.1%20Bansir%20Laut%20Pontianak&t=&z=15&ie=UTF8&iwloc=&output=embed"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Lokasi Rumangsa Kopi">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
