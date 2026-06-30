@@ -143,16 +143,16 @@ CATEGORY_GROUPS = {
 
 # Galeri — foto asli outlet (taruh file di static/img/gallery/1.jpg ... 10.jpg)
 GALLERY = [
-    {"src": "img/gallery/1.jpg", "caption": "Sudut duduk outdoor yang teduh"},
-    {"src": "img/gallery/2.jpg", "caption": "Meja kerja dekat jendela"},
-    {"src": "img/gallery/3.jpg", "caption": "Proses seduh manual brew"},
-    {"src": "img/gallery/4.jpg", "caption": "Suasana sore di area lounge"},
-    {"src": "img/gallery/5.jpg", "caption": "Detail signature drink"},
-    {"src": "img/gallery/6.jpg", "caption": "Bar kopi dan barista"},
-    {"src": "img/gallery/7.jpg", "caption": "Cangkir hangat di pagi hari"},
-    {"src": "img/gallery/8.jpg", "caption": "Area komunal untuk nongkrong"},
-    {"src": "img/gallery/9.jpg", "caption": "Detail kayu dan tekstur ruang"},
-    {"src": "img/gallery/10.jpg", "caption": "Senja di teras Rumangsa"},
+    {"src": "img/gallery/1.jpg"},
+    {"src": "img/gallery/2.jpg"},
+    {"src": "img/gallery/3.jpg"},
+    {"src": "img/gallery/4.jpg"},
+    {"src": "img/gallery/5.jpg"},
+    {"src": "img/gallery/6.jpg"},
+    {"src": "img/gallery/7.jpg"},
+    {"src": "img/gallery/8.jpg"},
+    {"src": "img/gallery/9.jpg"},
+    {"src": "img/gallery/10.jpg"},
 ]
 
 INFO = {
