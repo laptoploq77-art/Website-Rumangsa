@@ -283,3 +283,24 @@ footer a:hover{opacity:1;text-decoration:underline;}
   .reveal{opacity:1;transform:none;transition:none;}
   html{scroll-behavior:auto;}
 }
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;             /* Memberikan jarak antara logo lingkaran dan tulisan */
+  text-decoration: none;
+}
+
+.logo-img {
+  width: 45px;           /* Ukuran lebar logo */
+  height: 45px;          /* Ukuran tinggi logo (harus sama dengan width agar bulat sempurna) */
+  border-radius: 50%;    /* Mengubah bentuk kotak menjadi lingkaran */
+  object-fit: cover;     /* Memastikan isi gambar tetap proporsional di dalam lingkaran */
+  display: block;
+}
+
+.brand-text {
+  font-size: 1.2rem;     /* Mengatur ukuran huruf tulisan di samping logo */
+  font-weight: 600;      /* Membuat tulisan sedikit lebih tebal/bold */
+  color: #2b1b17;        /* Sesuaikan dengan kode warna tema kedai kopi kamu (misal cokelat tua) */
+  letter-spacing: 0.5px; /* Memberikan sedikit renggang pada teks agar elegan */
+}
