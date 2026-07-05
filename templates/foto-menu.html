@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Foto Menu{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <div class="container">
+    <span class="eyebrow">Foto Menu</span>
+    <h1>Biar kebayang, ini rupa menunya.</h1>
+    <p style="max-width:54ch;opacity:.85;">Kumpulan foto asli dari beberapa menu Rumangsa Kopi. Untuk daftar lengkap beserta harga, kunjungi halaman <a href="{{ url_for('menu') }}" style="color:var(--gold);text-decoration:underline;">Menu</a>.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="photo-menu-grid">
+      {% for p in photos %}
+      <figure class="photo-menu-card reveal">
+        <div class="photo-menu-img">
+          <img src="{{ url_for('static', filename=p.src) }}" alt="{{ p.name }}" loading="lazy">
+        </div>
+        <figcaption>{{ p.name }}</figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

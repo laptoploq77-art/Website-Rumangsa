@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Deskripsi Menu{% endblock %}
+
+{% block content %}
+
+<section class="menu-hero">
+  <div class="container">
+    <span class="eyebrow" style="color:var(--terracotta-deep);font-weight:700;">Deskripsi Menu</span>
+    <h1>Kenalan dulu sama setiap menu, sebelum pesan.</h1>
+    <p style="max-width:54ch;">Penjelasan singkat rasa dan karakter tiap menu, biar tidak salah pilih. Untuk harga lengkap, cek halaman <a href="{{ url_for('menu') }}" style="color:var(--terracotta-deep);text-decoration:underline;">Menu</a>.</p>
+    <div class="filter-row" id="filterRow">
+      {% for group in groups %}
+      <button class="filter-btn {{ 'active' if loop.first }}" data-filter="{{ group|lower|replace(' ', '-') }}">{{ group }}</button>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:10px;">
+  <div class="container">
+    {% for cat, data in menu.items() %}
+    <div class="menu-category reveal"
+         data-groups="semua {% if cat in groups['Minuman'] %}minuman{% endif %} {% if cat in groups['Makanan'] %}makanan{% endif %}">
+      <div class="cat-head">
+        <h3>{{ cat }}</h3>
+      </div>
+      {% if data.note %}<p class="cat-note">{{ data.note }}</p>{% endif %}
+      <div class="desc-list">
+        {% for item in data['items'] %}
+        <div class="desc-item">
+          <span class="desc-name">{{ item.name }}{% if item.new %}<span class="badge">BARU</span>{% endif %}</span>
+          <p class="desc-text">{{ item.desc }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const categories = document.querySelectorAll('.menu-category');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      categories.forEach(cat => {
+        const groups = cat.dataset.groups;
+        cat.style.display = groups.includes(f) ? '' : 'none';
+      });
+    });
+  });
+</script>
+{% endblock %}
