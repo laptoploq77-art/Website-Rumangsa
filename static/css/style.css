@@ -240,6 +240,34 @@ section{padding:84px 0;}
   color:var(--cream-soft);font-size:0.85rem;font-weight:500;
 }
 
+/* ---------- Deskripsi Menu page ---------- */
+.desc-list{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 38px;}
+@media (max-width:700px){.desc-list{grid-template-columns:1fr;}}
+.desc-item{padding:14px 0;border-bottom:1px solid var(--line);}
+.desc-name{font-weight:600;font-family:var(--display);color:var(--espresso);}
+.desc-name .badge{
+  font-size:0.65rem;font-weight:700;background:var(--gold);color:var(--espresso);
+  padding:2px 7px;border-radius:6px;margin-left:8px;vertical-align:middle;
+}
+.desc-text{margin-top:4px;font-size:0.9rem;color:var(--espresso-soft);line-height:1.5;}
+
+/* ---------- Foto Menu page ---------- */
+.photo-menu-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:22px;
+}
+@media (max-width:860px){.photo-menu-grid{grid-template-columns:repeat(3,1fr);}}
+@media (max-width:620px){.photo-menu-grid{grid-template-columns:repeat(2,1fr);}}
+.photo-menu-card{margin:0;text-align:center;}
+.photo-menu-img{
+  border-radius:16px;overflow:hidden;aspect-ratio:1/1;box-shadow:var(--shadow);
+  background:var(--cream-soft);
+}
+.photo-menu-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
+.photo-menu-card:hover .photo-menu-img img{transform:scale(1.06);}
+.photo-menu-card figcaption{
+  margin-top:10px;font-weight:600;font-size:0.92rem;color:var(--espresso);
+}
+
 /* ---------- About page ---------- */
 .info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:30px;}
 @media (max-width:700px){.info-grid{grid-template-columns:1fr;}}
