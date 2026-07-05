@@ -19,6 +19,8 @@
     <div class="nav-links" id="navLinks">
       <a href="{{ url_for('home') }}" class="{{ 'active' if request.endpoint=='home' }}">Beranda</a>
       <a href="{{ url_for('menu') }}" class="{{ 'active' if request.endpoint=='menu' }}">Menu</a>
+      <a href="{{ url_for('foto_menu') }}" class="{{ 'active' if request.endpoint=='foto_menu' }}">Foto Menu</a>
+      <a href="{{ url_for('deskripsi_menu') }}" class="{{ 'active' if request.endpoint=='deskripsi_menu' }}">Deskripsi Menu</a>
       <a href="{{ url_for('gallery') }}" class="{{ 'active' if request.endpoint=='gallery' }}">Galeri</a>
       <a href="{{ url_for('about') }}" class="{{ 'active' if request.endpoint=='about' }}">Tentang &amp; Lokasi</a>
     </div>
@@ -41,6 +43,8 @@
         <h4>Jelajahi</h4>
         <a href="{{ url_for('home') }}">Beranda</a>
         <a href="{{ url_for('menu') }}">Menu</a>
+        <a href="{{ url_for('foto_menu') }}">Foto Menu</a>
+        <a href="{{ url_for('deskripsi_menu') }}">Deskripsi Menu</a>
         <a href="{{ url_for('gallery') }}">Galeri</a>
         <a href="{{ url_for('about') }}">Tentang &amp; Lokasi</a>
       </div>
