@@ -7,7 +7,7 @@
   <div class="container">
     <span class="eyebrow" style="color:var(--terracotta-deep);font-weight:700;">Deskripsi Menu</span>
     <h1>Kenalan dulu sama setiap menu, sebelum pesan.</h1>
-    <p style="max-width:54ch;">Penjelasan singkat rasa dan karakter tiap menu, biar tidak salah pilih. Untuk harga lengkap, cek halaman <a href="{{ url_for('menu') }}" style="color:var(--terracotta-deep);text-decoration:underline;">Menu</a>.</p>
+    <p style="max-width:54ch;">Penjelasan singkat rasa dan karakter tiap menu, biar tidak salah pilih. Untuk harga lengkap, cek halaman <a href="{{ url_for('menu') }}" style="color:var(--terracotta-deep);text-decoration:underline;">Daftar Menu</a>.</p>
     <div class="filter-row" id="filterRow">
       {% for group in groups %}
       <button class="filter-btn {{ 'active' if loop.first }}" data-filter="{{ group|lower|replace(' ', '-') }}">{{ group }}</button>
