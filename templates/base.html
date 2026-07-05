@@ -18,7 +18,7 @@
     <button class="nav-toggle" id="navToggle" aria-label="Buka menu navigasi">&#9776;</button>
     <div class="nav-links" id="navLinks">
       <a href="{{ url_for('home') }}" class="{{ 'active' if request.endpoint=='home' }}">Beranda</a>
-      <a href="{{ url_for('menu') }}" class="{{ 'active' if request.endpoint=='menu' }}">Menu</a>
+      <a href="{{ url_for('menu') }}" class="{{ 'active' if request.endpoint=='menu' }}">Daftar Menu</a>
       <a href="{{ url_for('foto_menu') }}" class="{{ 'active' if request.endpoint=='foto_menu' }}">Foto Menu</a>
       <a href="{{ url_for('deskripsi_menu') }}" class="{{ 'active' if request.endpoint=='deskripsi_menu' }}">Deskripsi Menu</a>
       <a href="{{ url_for('gallery') }}" class="{{ 'active' if request.endpoint=='gallery' }}">Galeri</a>
@@ -42,7 +42,7 @@
       <div>
         <h4>Jelajahi</h4>
         <a href="{{ url_for('home') }}">Beranda</a>
-        <a href="{{ url_for('menu') }}">Menu</a>
+        <a href="{{ url_for('menu') }}">Daftar Menu</a>
         <a href="{{ url_for('foto_menu') }}">Foto Menu</a>
         <a href="{{ url_for('deskripsi_menu') }}">Deskripsi Menu</a>
         <a href="{{ url_for('gallery') }}">Galeri</a>
