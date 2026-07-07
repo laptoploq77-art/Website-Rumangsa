@@ -43,13 +43,21 @@ if (soundBtn && audio) {
   setIcon();
 }
 
-// --- Highlight foto menu saat dituju dari Daftar Menu (anchor #foto-...) ---
-function highlightTargetPhoto() {
-  if (!location.hash.startsWith('#foto-')) return;
-  const target = document.querySelector(location.hash);
-  if (!target || !target.classList.contains('photo-menu-card')) return;
+// --- Highlight target saat dituju via anchor dari Daftar Menu ---
+// Mendukung #foto-... di halaman Foto Menu, dan #desc-... di halaman Deskripsi Menu.
+function highlightTargetAnchor() {
+  const hash = location.hash;
+  if (!hash.startsWith('#foto-') && !hash.startsWith('#desc-')) return;
 
-  target.classList.add('in'); // pastikan langsung terlihat (skip reveal fade)
+  const target = document.querySelector(hash);
+  if (!target) return;
+  if (!target.classList.contains('photo-menu-card') && !target.classList.contains('desc-item')) return;
+
+  // Pastikan kartu/parent kategori sudah terlihat (skip animasi reveal fade)
+  target.classList.add('in');
+  const parentReveal = target.closest('.reveal');
+  if (parentReveal) parentReveal.classList.add('in');
+
   setTimeout(() => {
     target.scrollIntoView({ behavior: 'smooth', block: 'center' });
     target.classList.add('highlight');
@@ -57,5 +65,5 @@ function highlightTargetPhoto() {
   }, 60);
 }
 
-window.addEventListener('DOMContentLoaded', highlightTargetPhoto);
-window.addEventListener('hashchange', highlightTargetPhoto);
+window.addEventListener('DOMContentLoaded', highlightTargetAnchor);
+window.addEventListener('hashchange', highlightTargetAnchor);
