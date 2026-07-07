@@ -27,7 +27,7 @@
       {% if data.note %}<p class="cat-note">{{ data.note }}</p>{% endif %}
       <div class="desc-list">
         {% for item in data['items'] %}
-        <div class="desc-item">
+        <div class="desc-item" id="desc-{{ item.slug }}">
           <span class="desc-name">{{ item.name }}{% if item.new %}<span class="badge">BARU</span>{% endif %}</span>
           <p class="desc-text">{{ item.desc }}</p>
         </div>
