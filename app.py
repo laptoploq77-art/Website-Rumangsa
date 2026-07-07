@@ -151,12 +151,36 @@ MENU_PHOTOS_DIR = os.path.join(app.root_path, "static", "img", "menu-photos")
 ALLOWED_PHOTO_EXTENSIONS = (".jpg", ".jpeg", ".png", ".webp", ".gif", ".jfif")
 
 
+def build_photo_categories():
+    """Petakan slug foto -> kelompok ('minuman'/'makanan').
+
+    Kelompok ditentukan dari kategori MENU tempat item tsb berada
+    (lihat CATEGORY_GROUPS di bawah), lewat field 'photo' pada tiap item.
+    Foto yang belum tersambung ke item MENU manapun akan diberi
+    kelompok 'lainnya' agar tetap muncul di filter "Semua".
+    """
+    mapping = {}
+    for cat_name, data in MENU.items():
+        if cat_name in CATEGORY_GROUPS["Minuman"]:
+            group = "minuman"
+        elif cat_name in CATEGORY_GROUPS["Makanan"]:
+            group = "makanan"
+        else:
+            continue
+        for item in data["items"]:
+            if item.get("photo"):
+                mapping[item["photo"]] = group
+    return mapping
+
+
 def load_menu_photos():
     """Pindai folder static/img/menu-photos dan susun daftar foto menu.
 
     Nama tampilan (caption) dibuat otomatis dari nama file, misalnya
-    'crispy-chicken-mayo.jpg' -> 'Crispy Chicken Mayo'.
+    'crispy-chicken-mayo.jpg' -> 'Crispy Chicken Mayo'. Tiap foto juga
+    diberi label kelompok (Minuman/Makanan) berdasarkan data MENU.
     """
+    photo_categories = build_photo_categories()
     photos = []
     if os.path.isdir(MENU_PHOTOS_DIR):
         for filename in sorted(os.listdir(MENU_PHOTOS_DIR), key=str.lower):
@@ -165,10 +189,12 @@ def load_menu_photos():
                 display_name = display_name.replace("_", " ").replace("-", " ").strip()
                 display_name = " ".join(display_name.split())
                 display_name = display_name.title()
+                slug = os.path.splitext(filename)[0].lower()
                 photos.append({
                     "src": f"img/menu-photos/{filename}",
                     "name": display_name or filename,
-                    "slug": os.path.splitext(filename)[0].lower(),
+                    "slug": slug,
+                    "group": photo_categories.get(slug, "lainnya"),
                 })
     return photos
 
@@ -215,7 +241,12 @@ def menu():
 
 @app.route("/foto-menu")
 def foto_menu():
-    return render_template("foto-menu.html", photos=load_menu_photos(), info=INFO)
+    return render_template(
+        "foto-menu.html",
+        photos=load_menu_photos(),
+        photo_groups=["Semua", "Minuman", "Makanan"],
+        info=INFO,
+    )
 
 
 @app.route("/deskripsi-menu")
