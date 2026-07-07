@@ -27,17 +27,15 @@
       {% if data.note %}<p class="cat-note">{{ data.note }}</p>{% endif %}
       <div class="menu-list">
         {% for item in data['items'] %}
-        {% if item.photo %}
-        <a class="menu-item has-photo" href="{{ url_for('foto_menu') }}#foto-{{ item.photo }}" title="Lihat foto {{ item.name }}">
-          <span class="name">{{ item.name }}{% if item.new %}<span class="badge">BARU</span>{% endif %}</span>
-          <span class="price">{{ item.price }}</span>
-        </a>
-        {% else %}
         <div class="menu-item">
+          {% if item.photo %}
+          <a class="name name-link" href="{{ url_for('foto_menu') }}#foto-{{ item.photo }}" title="Lihat foto {{ item.name }}">{{ item.name }}{% if item.new %}<span class="badge">BARU</span>{% endif %}</a>
+          {% else %}
           <span class="name">{{ item.name }}{% if item.new %}<span class="badge">BARU</span>{% endif %}</span>
+          {% endif %}
+          <a class="btn-desc" href="{{ url_for('deskripsi_menu') }}#desc-{{ item.slug }}" title="Lihat deskripsi {{ item.name }}">Deskripsi</a>
           <span class="price">{{ item.price }}</span>
         </div>
-        {% endif %}
         {% endfor %}
       </div>
     </div>
