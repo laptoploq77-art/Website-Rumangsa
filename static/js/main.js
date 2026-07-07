@@ -42,3 +42,20 @@ if (soundBtn && audio) {
   });
   setIcon();
 }
+
+// --- Highlight foto menu saat dituju dari Daftar Menu (anchor #foto-...) ---
+function highlightTargetPhoto() {
+  if (!location.hash.startsWith('#foto-')) return;
+  const target = document.querySelector(location.hash);
+  if (!target || !target.classList.contains('photo-menu-card')) return;
+
+  target.classList.add('in'); // pastikan langsung terlihat (skip reveal fade)
+  setTimeout(() => {
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    target.classList.add('highlight');
+    setTimeout(() => target.classList.remove('highlight'), 3600);
+  }, 60);
+}
+
+window.addEventListener('DOMContentLoaded', highlightTargetPhoto);
+window.addEventListener('hashchange', highlightTargetPhoto);
