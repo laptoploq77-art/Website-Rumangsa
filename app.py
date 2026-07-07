@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -135,32 +137,39 @@ MENU = {
 }
 
 # ---------------------------------------------------------------------------
-# FOTO MENU — 20 foto asli menu yang disiapkan pemilik
+# FOTO MENU — dibaca OTOMATIS dari folder static/img/menu-photos
 # Ditampilkan apa adanya di halaman "Foto Menu", tidak disandingkan dengan
 # data MENU di atas.
+#
+# Dulu daftar ini di-hardcode manual (hanya 20 foto), jadi setiap kali ada
+# foto baru diupload ke folder, foto itu tidak muncul di website sampai
+# kode ini diubah manual. Sekarang folder di-scan otomatis setiap halaman
+# dibuka, jadi cukup upload file ke static/img/menu-photos/ dan foto akan
+# langsung tampil tanpa perlu edit app.py sama sekali.
 # ---------------------------------------------------------------------------
-MENU_PHOTOS = [
-    {"src": "img/menu-photos/espresso.jpg", "name": "Espresso"},
-    {"src": "img/menu-photos/americano.jpg", "name": "Americano"},
-    {"src": "img/menu-photos/long-black.jpg", "name": "Long Black"},
-    {"src": "img/menu-photos/caffe-latte.jpg", "name": "Caffe Latte"},
-    {"src": "img/menu-photos/cappuccino.jpg", "name": "Cappuccino"},
-    {"src": "img/menu-photos/rumansa.jpg", "name": "Rumansa"},
-    {"src": "img/menu-photos/secret-mango.jpg", "name": "Secret Mango"},
-    {"src": "img/menu-photos/unicorn-milk.jpg", "name": "Unicorn Milk"},
-    {"src": "img/menu-photos/black-oreo-berry.jpg", "name": "Black Oreo Berry"},
-    {"src": "img/menu-photos/strawberry-latte.jpg", "name": "Strawberry Latte"},
-    {"src": "img/menu-photos/taro-latte.jpg", "name": "Taro Latte"},
-    {"src": "img/menu-photos/choco-latte.jpg", "name": "Choco Latte"},
-    {"src": "img/menu-photos/greentea-latte.jpg", "name": "Greentea Latte"},
-    {"src": "img/menu-photos/red-velvet-latte.jpg", "name": "Red Velvet Latte"},
-    {"src": "img/menu-photos/lychee.png", "name": "Lychee"},
-    {"src": "img/menu-photos/peach.png", "name": "Peach"},
-    {"src": "img/menu-photos/lemon.png", "name": "Lemon"},
-    {"src": "img/menu-photos/lime-squash.jpg", "name": "Lime Squash"},
-    {"src": "img/menu-photos/orange-squash.jpg", "name": "Orange Squash"},
-    {"src": "img/menu-photos/air-mineral.jpg", "name": "Air Mineral"},
-]
+MENU_PHOTOS_DIR = os.path.join(app.root_path, "static", "img", "menu-photos")
+ALLOWED_PHOTO_EXTENSIONS = (".jpg", ".jpeg", ".png", ".webp", ".gif", ".jfif")
+
+
+def load_menu_photos():
+    """Pindai folder static/img/menu-photos dan susun daftar foto menu.
+
+    Nama tampilan (caption) dibuat otomatis dari nama file, misalnya
+    'crispy-chicken-mayo.jpg' -> 'Crispy Chicken Mayo'.
+    """
+    photos = []
+    if os.path.isdir(MENU_PHOTOS_DIR):
+        for filename in sorted(os.listdir(MENU_PHOTOS_DIR), key=str.lower):
+            if filename.lower().endswith(ALLOWED_PHOTO_EXTENSIONS):
+                display_name = os.path.splitext(filename)[0]
+                display_name = display_name.replace("_", " ").replace("-", " ").strip()
+                display_name = " ".join(display_name.split())
+                display_name = display_name.title()
+                photos.append({
+                    "src": f"img/menu-photos/{filename}",
+                    "name": display_name or filename,
+                })
+    return photos
 
 # Kategori dikelompokkan untuk filter cepat di halaman menu
 CATEGORY_GROUPS = {
@@ -205,7 +214,7 @@ def menu():
 
 @app.route("/foto-menu")
 def foto_menu():
-    return render_template("foto-menu.html", photos=MENU_PHOTOS, info=INFO)
+    return render_template("foto-menu.html", photos=load_menu_photos(), info=INFO)
 
 
 @app.route("/deskripsi-menu")
