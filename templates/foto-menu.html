@@ -15,7 +15,7 @@
   <div class="container">
     <div class="photo-menu-grid">
       {% for p in photos %}
-      <figure class="photo-menu-card reveal">
+      <figure class="photo-menu-card reveal" id="foto-{{ p.slug }}">
         <div class="photo-menu-img">
           <img src="{{ url_for('static', filename=p.src) }}" alt="{{ p.name }}" loading="lazy">
         </div>
