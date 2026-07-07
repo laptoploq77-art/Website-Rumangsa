@@ -8,14 +8,19 @@
     <span class="eyebrow">Foto Menu</span>
     <h1>Biar kebayang, ini rupa menunya.</h1>
     <p style="max-width:54ch;opacity:.85;">Kumpulan foto asli dari beberapa menu Rumangsa Kopi. Untuk daftar lengkap beserta harga, kunjungi halaman <a href="{{ url_for('menu') }}" style="color:var(--gold);text-decoration:underline;">Daftar Menu</a>.</p>
+    <div class="filter-row" id="filterRow">
+      {% for group in photo_groups %}
+      <button class="filter-btn {{ 'active' if loop.first }}" data-filter="{{ group|lower|replace(' ', '-') }}">{{ group }}</button>
+      {% endfor %}
+    </div>
   </div>
 </section>
 
 <section>
   <div class="container">
-    <div class="photo-menu-grid">
+    <div class="photo-menu-grid" id="photoGrid">
       {% for p in photos %}
-      <figure class="photo-menu-card reveal" id="foto-{{ p.slug }}">
+      <figure class="photo-menu-card reveal" id="foto-{{ p.slug }}" data-groups="semua {{ p.group }}">
         <div class="photo-menu-img">
           <img src="{{ url_for('static', filename=p.src) }}" alt="{{ p.name }}" loading="lazy">
         </div>
@@ -26,4 +31,22 @@
   </div>
 </section>
 
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const filterBtns = document.querySelectorAll('#filterRow .filter-btn');
+  const photoCards = document.querySelectorAll('#photoGrid .photo-menu-card');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      photoCards.forEach(card => {
+        const groups = card.dataset.groups;
+        card.style.display = groups.includes(f) ? '' : 'none';
+      });
+    });
+  });
+</script>
 {% endblock %}
